@@ -20,25 +20,22 @@ export default function SignUp() {
 
     let profileImagUrl = "";
 
-    if(!fullName) {
-      setError("Please enter your name")
-      return
+    if (!fullName) {
+      setError("Please enter your name");
+      return;
     }
 
-    if(!validateEmail(email)){
-      setError("Please enter a valid email")
-      return
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email");
+      return;
     }
 
-    if(!password) {
-      setError("Please enter password")
-      return
+    if (!password) {
+      setError("Please enter password");
+      return;
     }
 
-    setError("")
-
-    
-
+    setError("");
   };
 
   return (
