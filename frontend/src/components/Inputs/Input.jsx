@@ -14,9 +14,7 @@ export default function Input({value, onChange, label, placeholder, type}) {
 
       <div className="input-box">
         <input
-          type={
-            type == "password" ? (showPassword ? "text" : "password") : type
-          }
+          type={type == "password" ? showPassword ? "text" : "password" : type}
           placeholder={placeholder}
           className="w-full bg-transparent outline-none"
           value={value}
@@ -35,7 +33,7 @@ export default function Input({value, onChange, label, placeholder, type}) {
               <FaRegEyeSlash
                 size={22}
                 className="text-slate-400 cursor-pointer"
-                onClick={() => toggleShowPassword}
+                onClick={() => toggleShowPassword()}
               />
             )}
           </>
