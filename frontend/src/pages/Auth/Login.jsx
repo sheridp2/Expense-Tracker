@@ -14,7 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const {updateUser } = useContext(UserContext)
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -44,6 +44,7 @@ export default function Login() {
 
       if (token) {
         localStorage.setItem("token", token);
+        updateUser(user);
         navigate("/dashboard");
       }
     } catch (error) {
