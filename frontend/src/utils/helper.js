@@ -17,10 +17,26 @@ export const getInitials = (name) => {
 };
 
 export const addThousandsSeparator = (num) => {
-  if(num == null || isNaN(num)) return ""
+  if (num == null || isNaN(num)) return "";
 
   const [integerPart, fractionalPart] = num.toString().split(".");
   const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  return fractionalPart ? `${formattedInteger}.${fractionalPart}` : formattedInteger;
-}
+  return fractionalPart
+    ? `${formattedInteger}.${fractionalPart}`
+    : formattedInteger;
+};
+
+export const prepareExpenseBarChartData = (data = []) => {
+  const chartData = data.map((item) => ({
+    category: item?.category,
+    amount: item?.amount,
+    date: formatMonth(item?.date)
+  }));
+
+  return chartData;
+};
+
+ const formatMonth = (date) => {
+    return new Date(date).toLocaleString("default", { month: "short" });
+  };
