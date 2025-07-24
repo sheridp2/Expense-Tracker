@@ -12,7 +12,6 @@ import {
 } from "recharts";
 
 const CustomBarChart = ({ data }) => {
-    console.log(data);
     
   const getBarColor = (index) => {
     return index % 2 === 0 ? "#875cf5" : "cfbefb";
