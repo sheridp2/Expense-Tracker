@@ -6,7 +6,6 @@ const COLORS =["#875CF5", "#FA2C37", "#FF6900", "#4F39F6"]
 const RecentIncomeWithChart = ({ data, totalIncome }) => {
     
     const [chartData, setChartData] = useState([]);
-    console.log(chartData);
 
   const prepareChartData = () => {
     const dataArr = data?.map((item) => ({
@@ -14,7 +13,6 @@ const RecentIncomeWithChart = ({ data, totalIncome }) => {
       amount: item?.amount,
     }));
 
-    console.log(dataArr)
     setChartData(dataArr);
   };
 

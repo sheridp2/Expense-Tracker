@@ -39,6 +39,14 @@ export const prepareExpenseBarChartData = (data = []) => {
   return chartData;
 };
 
-//  const formatMonth = (date) => {
-//     return new Date(date).toLocaleString("default", { month: "short" });
-//   };
+export const prepareIncomeBarChartData = (data = []) => {
+  const sortedData = [...data].sort((a,b) => new Date(a.date) - new Date(b.date));
+  
+  const chartData = sortedData.map((item) => ({
+    date: moment(item?.date).format('Do MMM'),
+    amount: item?.amount,
+    source: item?.source,
+  }))
+
+  return chartData;
+}
