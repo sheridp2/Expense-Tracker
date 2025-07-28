@@ -7,6 +7,8 @@ import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
 import { toast } from "react-hot-toast";
+import IncomeList from "../../components/Income/IncomeList";
+import DeleteAlert from "../../components/DeleteAlert";
 
 export default function Income() {
   useUserAuth();
@@ -80,7 +82,20 @@ export default function Income() {
     }
   };
 
-  const deleteIncome = async (id) => {};
+  const deleteIncome = async (id, source) => {
+    try {
+      await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
+
+      setOpenDeleteAlert({ show: false, data: null });
+      toast.success("Income details deleted successfully");
+      fetchIncomeDeatils();
+    } catch (error) {
+      console.error(
+        "Error deleting income:",
+        error.response?.data?.message || error.message
+      );
+    }
+  };
 
   const handleDownloadIncomeDetails = async () => {};
 
@@ -94,6 +109,13 @@ export default function Income() {
               onAddIncome={() => setOpenAddIncomeModal(true)}
             />
           </div>
+          <IncomeList
+            transactions={incomeData}
+            onDelete={(id, source) => {
+              setOpenDeleteAlert({ show: true, data: id, source: source });
+            }}
+            onDOwnload={handleDownloadIncomeDetails}
+          />
         </div>
 
         <Modal
@@ -102,6 +124,17 @@ export default function Income() {
           title="Add Income"
         >
           <AddIncomeForm onAddIncome={handleAddIncome} />
+        </Modal>
+
+        <Modal
+          isOpen={openDeleteAlert.show}
+          onClose={() => setOpenDeleteAlert({ show: false, data: null, source: null })}
+          title="Delete Income"
+        >
+          <DeleteAlert
+            content={`Are you sure you want to delete "${openDeleteAlert.source}" from income data?`}
+            onDelete={() => deleteIncome(openDeleteAlert.data)}
+          />
         </Modal>
       </div>
     </DashboardLayout>
