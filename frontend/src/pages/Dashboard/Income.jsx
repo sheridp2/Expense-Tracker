@@ -18,6 +18,7 @@ export default function Income() {
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
+    source: null,
   });
 
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
@@ -76,7 +77,7 @@ export default function Income() {
     }
   };
 
-  const deleteIncome = async (id, source) => {
+  const deleteIncome = async (id) => {
     try {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
 
