@@ -22,7 +22,7 @@ export default function Income() {
 
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
 
-  const fetchIncomeDeatils = async () => {
+  const fetchIncomeDetails = async () => {
     if (loading) return;
 
     try {
@@ -39,12 +39,6 @@ export default function Income() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchIncomeDeatils();
-
-    return () => {};
-  }, []);
 
   const handleAddIncome = async (income) => {
     const { source, amount, date, icon } = income;
@@ -73,7 +67,7 @@ export default function Income() {
 
       setOpenAddIncomeModal(false);
       toast.success("Income added successfully");
-      fetchIncomeDeatils();
+      fetchIncomeDetails();
     } catch (error) {
       console.error(
         "Error adding income:",
@@ -88,7 +82,7 @@ export default function Income() {
 
       setOpenDeleteAlert({ show: false, data: null });
       toast.success("Income details deleted successfully");
-      fetchIncomeDeatils();
+      fetchIncomeDetails();
     } catch (error) {
       console.error(
         "Error deleting income:",
@@ -98,6 +92,12 @@ export default function Income() {
   };
 
   const handleDownloadIncomeDetails = async () => {};
+
+  useEffect(() => {
+    fetchIncomeDetails();
+
+    return () => {};
+  }, []);
 
   return (
     <DashboardLayout activeMenu="Income">
@@ -128,7 +128,9 @@ export default function Income() {
 
         <Modal
           isOpen={openDeleteAlert.show}
-          onClose={() => setOpenDeleteAlert({ show: false, data: null, source: null })}
+          onClose={() =>
+            setOpenDeleteAlert({ show: false, data: null, source: null })
+          }
           title="Delete Income"
         >
           <DeleteAlert
